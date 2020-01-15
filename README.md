@@ -40,7 +40,10 @@ Used in:
 
 Navigate an ant through a U-shaped maze. Exploration performance is measured as the fraction of states visited. Currently only implemented in `MuJoCo` 
 
-![info][docs/ant_maze.png]
+<p align="center">
+  <img src="docs/ant_maze.png" width="500" title="Ant Maze">
+</p>
+
 
 Used in:
 - [MAX](https://arxiv.org/abs/1810.12162)
