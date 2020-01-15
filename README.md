@@ -4,14 +4,21 @@ This repository contains a number of environments and algorithms for exploration
 
 ## Constraints
 
-- Only consider *continuous* actions
-- Only open source environments (i.e. not `MuJoCo`)
+- Only considers *continuous* actions
+- Only open source implementations (i.e. not `MuJoCo`)
+
+## Requirements
+
+- `pip install torch`
+- `pip install gym`
+- `pip install roboschool==1.0.48`
+- `pip install box2d-py`
 
 # Environments
 
-## MountainCar
+## SparseMountainCar
 
-A continuous-action version of the mountain car problem.
+A continuous-action version of the mountain car problem. A reward of +1 is achieved when the car escapes the valley.
 
 Used in:
 
@@ -23,6 +30,8 @@ Used in:
 
 ## CartpoleSwingup
 
+A pole that starts facing down. The aim is to swing the pole upright. A reward of +1 is achieved when `cos(angle) > 0.8`
+
 Used in:
 
 - [VIME](https://arxiv.org/abs/1605.09674)
@@ -32,9 +41,7 @@ Used in:
 
 ## SparseDoublePendulum
 
-Only yield a reward if agent reaches upright position (given some threshold).
-
-> The Acrobot environment is also modified to have continuous torque input with a maximum magnitude of one. 
+Yield a reward of +1 if agent reaches upright position (given some threshold). This is a continuous action version of `Acrobot`.
 
 Used in:
 
@@ -46,7 +53,7 @@ Used in:
 
 ## SparseHalfCheetah
 
-A reward of +1 is achieved when the cheetah moves over five units
+A reward of +1 is achieved when the cheetah moves over __five__ units in the `x-axis`
 
 Used in:
 
@@ -56,8 +63,13 @@ Used in:
 - [EMI: Exploration with Mutual Information](https://arxiv.org/abs/1810.01176)
 - [Surprise-based intrinsic motivation for deep RL](https://arxiv.org/pdf/1703.01732.pdf)
 
-## Downstream HalfCheetah
+## SparseBipedalWalker
 
+A reward of +1 is achieved when the cheetah moves over __ten__ units in the `x-axis`
+
+# Future
+
+## Downstream HalfCheetah
 This task implements a separate *exploration* phase in which no reward is provided. Exploration performance is then measured implicitly by measuring task performance in a downstream task. These tasks are *running* and *flipping*:
 
 <p align="center">
@@ -72,7 +84,6 @@ Used in:
 - [Unsupervised Exploration with Deep Model-Based Reinforcement Learning](https://openreview.net/forum?id=B1xU4nAqK7)
 
 ## Pusher task
-
 <p align="center">
   <img src="docs/pusher.png" width="200" title="Pusher">
 </p>
@@ -80,16 +91,12 @@ Used in:
 Used in:
 - [Learning latent state representation for speeding up exploration](https://arxiv.org/pdf/1905.12621.pdf)
 
-# Future
-
 ## Ant Maze
-
 Navigate an ant through a U-shaped maze. Exploration performance is measured as the fraction of states visited. *Currently only implemented in `MuJoCo`* 
 
 <p align="center">
   <img src="docs/ant-maze.png" width="500" title="Ant Maze">
 </p>
-
 
 Used in:
 - [MAX](https://arxiv.org/abs/1810.12162)
@@ -97,7 +104,6 @@ Used in:
 
 
 ## Sparse VizDoom
-
 *Requires discrete actions*
 
 Used in:
@@ -105,7 +111,6 @@ Used in:
 ](https://pathak22.github.io/noreward-rl/)
 
 ## Swimmer Gather
-
 *Currently only implemented in `MuJoCo`*
 
 - [VIME](https://arxiv.org/abs/1605.09674)
@@ -114,7 +119,6 @@ Used in:
 - [EMI: Exploration with Mutual Information](https://arxiv.org/abs/1810.01176)
 
 ## PyBox2D Maze
-
 Used in
 - [Approximate Bayesian inference in spatial environments](https://arxiv.org/pdf/1805.07206.pdf)
 
@@ -164,4 +168,4 @@ In [Large-Scale Study of Curiosity-Driven Learning](https://arxiv.org/abs/1808.0
 - [Unsupervised Exploration with Deep Model-Based Reinforcement Learning](https://openreview.net/forum?id=B1xU4nAqK7)
 - [Self-Supervised Exploration via Disagreement](https://arxiv.org/pdf/1906.04161.pdf)
 - PETS
-- E-greedy
+- e-greedy

@@ -9,6 +9,7 @@ from baselines.envs import (
     SparseCartpoleSwingup,
     SparseDoublePendulum,
     SparseHalfCheetah,
+    SparseBipedalWalker,
     const,
 )
 
@@ -26,6 +27,8 @@ class TorchEnv(object):
             self._env = SparseDoublePendulum()
         elif env_name == const.SPARSE_HALF_CHEETAH:
             self._env = SparseHalfCheetah()
+        elif env_name == const.SPARSE_BIPEDAL_WALKER:
+            self._env = SparseBipedalWalker()
         else:
             self._env = gym.make(env_name)
 

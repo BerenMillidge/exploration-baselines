@@ -3,7 +3,7 @@ from baselines.envs import TorchEnv, const
 MAX_EPISODE_LEN = 200
 
 if __name__ == "__main__":
-    env = TorchEnv(const.SPARSE_HALF_CHEETAH, MAX_EPISODE_LEN)
+    env = TorchEnv(const.SPARSE_BIPEDAL_WALKER, MAX_EPISODE_LEN)
 
     s = env.reset()
 
