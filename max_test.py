@@ -196,11 +196,14 @@ def get_policy(
         j = min(i + 1024, size)
         s, a = buffer.states[i:j], buffer.actions[i:j]
         ns = buffer.states[i:j] + buffer.state_deltas[i:j]
+        r = buffer.rewards[i:j]
         s, a, ns = s.to(device), a.to(device), ns.to(device)
         with torch.no_grad():
             mu, var = model.forward_all(s, a)
-        """ TODO: """
-        r = measure(s, a, ns, mu, var, model)
+
+        if measure is not None:
+            r = measure(s, a, ns, mu, var, model)
+            
         agent.replay.add(s, a, r, ns)
 
     print("... transferred exploration buffer")
@@ -388,8 +391,8 @@ def do_max_exploration():
         else:
             action = env.sample_action()
 
-        next_state, _, done = env.step(action)
-        buffer.add(state, action, next_state)
+        next_state, reward, done = env.step(action)
+        buffer.add(state, action, next_state, reward)
 
         if render:
             env.render()

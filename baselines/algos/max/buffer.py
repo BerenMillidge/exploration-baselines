@@ -26,6 +26,7 @@ class Buffer:
         self.states = torch.zeros(buffer_size, d_state).float()
         self.actions = torch.zeros(buffer_size, d_action).float()
         self.state_deltas = torch.zeros(buffer_size, d_state).float()
+        self.rewards = torch.zeros(buffer_size, 1).float()
 
         self.normalizer = None
 
@@ -34,7 +35,7 @@ class Buffer:
     def setup_normalizer(self, normalizer):
         self.normalizer = normalizer
 
-    def add(self, state, action, next_state):
+    def add(self, state, action, next_state, reward):
         """
         add transition to buffer
         Args:
@@ -50,6 +51,7 @@ class Buffer:
         self.states[idx] = state
         self.actions[idx] = action
         self.state_deltas[idx] = state_delta
+        self.rewards[idx] = reward
 
         self._n_elements += 1
 
