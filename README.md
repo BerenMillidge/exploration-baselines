@@ -34,10 +34,15 @@ Used in:
 
 Only yield a reward if agent reaches upright position (given some threshold).
 
+> The Acrobot environment is also modified to have continuous torque input with a maximum magnitude of one. 
+
 Used in:
 
 - [VIME](https://arxiv.org/abs/1605.09674)
 - [Parameter state noise for exploration](https://arxiv.org/abs/1706.01905)
+- [Information Maximizing Exploration with a Latent Dynamics Model](https://arxiv.org/abs/1804.01238)
+- [Implicit generative modelling for efficient exploration](https://arxiv.org/pdf/1911.08017.pdf)
+
 
 ## SparseHalfCheetah
 
@@ -74,14 +79,6 @@ Used in:
 
 Used in:
 - [Learning latent state representation for speeding up exploration](https://arxiv.org/pdf/1905.12621.pdf)
-
-## SparseAcrobot
-
-> The Acrobot environment is also modified to have continuous torque input with a maximum magnitude of one. 
-
-Used in:
-- [Information Maximizing Exploration with a Latent Dynamics Model](https://arxiv.org/abs/1804.01238)
-- [Implicit generative modelling for efficient exploration](https://arxiv.org/pdf/1911.08017.pdf)
 
 # Future
 
@@ -144,7 +141,7 @@ Used in
 - [Bayesian Curiosity for Efficient Exploration in Reinforcement Learning](https://arxiv.org/pdf/1911.08701.pdf)
 - [Surprise-based intrinsic motivation for deep RL](https://arxiv.org/pdf/1703.01732.pdf)
 - [Implicit generative modelling for efficient exploration](https://arxiv.org/pdf/1911.08017.pdf)
-- [rllab]([rllab](https://github.com/rll/rllab]))
+- [rllab](https://github.com/rll/rllab)
 
 # Notes
 
@@ -159,3 +156,12 @@ In [Large-Scale Study of Curiosity-Driven Learning](https://arxiv.org/abs/1808.0
 <p align="center">
   <img src="docs/open-AI.png" width="500" title="Param noise">
 </p>
+
+# Baselines
+
+- [VIME: Variational Information Maximizing Exploration](https://arxiv.org/abs/1605.09674)
+- [Model-based active exploration](https://arxiv.org/abs/1810.12162)
+- [Unsupervised Exploration with Deep Model-Based Reinforcement Learning](https://openreview.net/forum?id=B1xU4nAqK7)
+- [Self-Supervised Exploration via Disagreement](https://arxiv.org/pdf/1906.04161.pdf)
+- PETS
+- E-greedy
