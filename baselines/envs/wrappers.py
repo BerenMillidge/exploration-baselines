@@ -39,7 +39,7 @@ class NoisyEnv(Wrapper):
         super().__init__(env)
 
     def add_noise(self, state):
-        state += torch.normal(0, self.stdev, size=state.size())
+        state += torch.normal(0, self.stdev, size=state.size()).to(state.device)
         return state
 
     def reset(self, filename=""):

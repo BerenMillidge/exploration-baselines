@@ -53,7 +53,9 @@ Used in:
 
 ## SparseHalfCheetah
 
-A reward of +1 is achieved when the cheetah moves over __five__ units in the `x-axis`
+A reward of +1 is achieved when the cheetah moves over __five__ units in the `x-axis`. 
+
+**Note**: __Reward function not work as expected__
 
 Used in:
 
