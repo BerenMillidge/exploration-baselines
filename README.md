@@ -123,6 +123,7 @@ Used in
 - [Approximate Bayesian inference in spatial environments](https://arxiv.org/pdf/1805.07206.pdf)
 
 # References
+- [Receding Horizon Curiosity](https://arxiv.org/pdf/1910.03620.pdf)
 - [VIME: Variational Information Maximizing Exploration](https://arxiv.org/abs/1605.09674)
 - [Model-based active exploration](https://arxiv.org/abs/1810.12162)
 - [Curiosity-Driven Exploration by Self-Supervised Prediction](https://pathak22.github.io/noreward-rl/)

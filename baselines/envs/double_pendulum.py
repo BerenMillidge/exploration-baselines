@@ -71,7 +71,7 @@ class SparseDoublePendulum(core.Env):
         ns[3] = bound(ns[3], -self.MAX_VEL_2, self.MAX_VEL_2)
         self.state = ns
         terminal = self._terminal()
-        reward = -1. if not terminal else 0.
+        reward = 0. if not terminal else 1.
         return (self._get_ob(), reward, terminal, {})
 
     def _get_ob(self):

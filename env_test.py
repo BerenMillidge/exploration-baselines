@@ -1,10 +1,11 @@
-from baselines.envs import TorchEnv, const
+from baselines.envs import TorchEnv, NoisyEnv, const
+import torch
 
 MAX_EPISODE_LEN = 200
 
 if __name__ == "__main__":
-    env = TorchEnv(const.SPARSE_BIPEDAL_WALKER, MAX_EPISODE_LEN)
-
+    env = TorchEnv(const.SPARSE_HALF_CHEETAH, MAX_EPISODE_LEN)
+    env = NoisyEnv(env, 0.02)
     s = env.reset()
 
     for _ in range(MAX_EPISODE_LEN):
