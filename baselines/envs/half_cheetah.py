@@ -11,13 +11,16 @@ class SparseHalfCheetah(object):
         return self._env.reset()
 
     def step(self, a):
-        s, _, d, i = self._env.step(a)
+        s, r, d, i = self._env.step(a)
+        
+        """
         pos_x = self._env.body_xyz[0]
 
         if pos_x > self.threshold:
             r = 1.
         else:
             r = 0.
+        """
 
         return s, r, d, i
 
