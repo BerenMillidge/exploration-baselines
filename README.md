@@ -67,7 +67,7 @@ Used in:
 
 ## SparseBipedalWalker
 
-A reward of +1 is achieved when the cheetah moves over __ten__ units in the `x-axis`
+A reward of +1 is achieved when the cheetah moves over __fifteen__ units in the `x-axis`
 
 # Future
 
