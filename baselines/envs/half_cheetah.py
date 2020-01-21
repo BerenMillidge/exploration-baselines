@@ -5,7 +5,7 @@ import gym
 class SparseHalfCheetah(object):
     def __init__(self):
         self._env = gym.make("RoboschoolHalfCheetah-v1")
-        self.threshold = 0
+        self.threshold = 5 # from VIME: Appendix B - Experimental setup
 
     def reset(self):
         return self._env.reset()
@@ -13,14 +13,14 @@ class SparseHalfCheetah(object):
     def step(self, a):
         s, r, d, i = self._env.step(a)
         
-        """
+        
         pos_x = self._env.body_xyz[0]
 
         if pos_x > self.threshold:
             r = 1.
         else:
             r = 0.
-        """
+        
 
         return s, r, d, i
 
