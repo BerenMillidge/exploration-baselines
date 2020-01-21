@@ -2,6 +2,7 @@
 # pylint: disable=no-member
 
 import torch
+import numpy as np
 from .torch_env import TorchEnv
 
 
