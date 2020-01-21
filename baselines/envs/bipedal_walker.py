@@ -95,7 +95,7 @@ class SparseBipedalWalker(gym.Env, EzPickle):
     def __init__(self):
         EzPickle.__init__(self)
         self.seed()
-        self.sparse_threshold = 10.0
+        self.sparse_threshold = 15.0
         self.viewer = None
 
         self.world = Box2D.b2World()
