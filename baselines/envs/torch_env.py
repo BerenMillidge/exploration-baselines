@@ -18,6 +18,10 @@ class TorchEnv(object):
     def __init__(
         self, env_name, max_episode_len, action_repeat=1, device="cpu",return_torch=False, seed=None
     ):
+        
+        print(env_name)
+        print(const.SPARSE_CARTPOLE_SWINGUP)
+        print(env_name == const.SPARSE_CARTPOLE_SWINGUP)
 
         if env_name == const.SPARSE_MOUNTAIN_CAR:
             self._env = SparseMountainCar()
