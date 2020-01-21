@@ -371,7 +371,8 @@ class SparseBipedalWalker(gym.Env, EzPickle):
 
         self.lidar = [LidarCallback() for _ in range(10)]
 
-        return self.step(np.array([0, 0, 0, 0]))[0]
+        return self.
+    np.array([0, 0, 0, 0]))[0]
 
     def step(self, action):
         control_speed = False
@@ -455,6 +456,8 @@ class SparseBipedalWalker(gym.Env, EzPickle):
             reward = 1.0
         else:
             reward = 0.0
+            
+        print("posx: ", pos[0])
 
         return np.array(state), reward, done, {}
 
