@@ -16,8 +16,12 @@ from baselines.envs import (
 
 class TorchEnv(object):
     def __init__(
-        self, env_name, max_episode_len, action_repeat=1, device="cpu", seed=None
+        self, env_name, max_episode_len, action_repeat=1, device="cpu",return_torch=False, seed=None
     ):
+        
+        print(env_name)
+        print(const.SPARSE_CARTPOLE_SWINGUP)
+        print(env_name == const.SPARSE_CARTPOLE_SWINGUP)
 
         if env_name == const.SPARSE_MOUNTAIN_CAR:
             self._env = SparseMountainCar()
@@ -36,6 +40,7 @@ class TorchEnv(object):
         self.action_repeat = action_repeat
         self.done = False
         self.device = device
+        self.return_torch = return_torch
         if seed is not None:
             self._env.seed(seed)
         self.t = 0
@@ -44,10 +49,14 @@ class TorchEnv(object):
         self.t = 0
         state = self._env.reset()
         self.done = False
-        return torch.tensor(state, dtype=torch.float32).to(self.device)
+        if self.return_torch:
+            return torch.tensor(state, dtype=torch.float32).to(self.device)
+        else:
+            return state
 
     def step(self, action):
-        action = action.cpu().detach().numpy()
+        if self.return_torch:
+            action = action.cpu().detach().numpy()
         reward = 0
 
         for _ in range(self.action_repeat):
@@ -59,12 +68,17 @@ class TorchEnv(object):
                 self.done = True
                 break
 
-        reward = torch.tensor([reward], dtype=torch.float32).to(self.device)
-        state = torch.tensor(state, dtype=torch.float32).to(self.device)
+        if self.return_torch:
+            reward = torch.tensor([reward], dtype=torch.float32).to(self.device)
+            state = torch.tensor(state, dtype=torch.float32).to(self.device)
+
         return state, reward, done
 
     def sample_action(self):
-        return torch.from_numpy(self._env.action_space.sample()).to(self.device)
+        if self.return_torch:
+            return torch.from_numpy(self._env.action_space.sample()).to(self.device)
+        else:
+            return self._env.action_space.sample()
 
     def render(self):
         self._env.render()
