@@ -39,7 +39,7 @@ class NoisyEnv(Wrapper):
         super().__init__(env)
 
     def add_noise(self, state):
-        if self.env_return_torch:
+        if self.env.return_torch:
             state += torch.normal(0, self.stdev, size=state.size()).to(state.device)
         else:
             state += np.random.normal(0,self.stdev, size=state.shape)
