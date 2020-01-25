@@ -455,7 +455,7 @@ class SparseBipedalWalker(gym.Env, EzPickle):
             reward = 1.0
         else:
             reward = 0.0
-        print("posx: ", pos[0])
+        #print("posx: ", pos[0])
         return np.array(state), reward, done, {}
 
     def render(self, mode="human"):
