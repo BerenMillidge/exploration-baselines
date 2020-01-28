@@ -4,14 +4,23 @@
 import gym
 import torch
 
-from baselines.envs import (
-    SparseMountainCar,
-    SparseCartpoleSwingup,
-    SparseDoublePendulum,
-    SparseHalfCheetah,
-    SparseBipedalWalker,
-    const,
-)
+try:
+    import roboschool
+    from baselines.envs import (
+        SparseMountainCar,
+        SparseCartpoleSwingup,
+        SparseDoublePendulum,
+        SparseHalfCheetah,
+        SparseBipedalWalker,
+        const,
+    )
+except:
+    from baselines.envs import (
+        SparseMountainCar,
+        SparseDoublePendulum,
+        SparseBipedalWalker,
+        const,
+    )
 
 
 class TorchEnv(object):
