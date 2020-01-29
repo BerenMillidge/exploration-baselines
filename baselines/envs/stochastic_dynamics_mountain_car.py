@@ -6,7 +6,13 @@ from baselines.envs import SparseMountainCar
 class StochasticMountainCar(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"], "video.frames_per_second": 30}
 
-    def __init__(self,noise_func="heteroscedastic",uniform_std=0.001,heteroscedastic_std=0.005,heteroscedastic_min_std=0.001, goal_velocity=0,no_penalty=True):
+    def __init__(self,noise_func="heteroscedastic",uniform_std=0.001,
+    heteroscedastic_std=0.005,
+    heteroscedastic_min_std=0.001,
+    max_threshold=0,
+    min_threshold = -1.2,
+     goal_velocity=0,
+     no_penalty=True):
         self.noise_func = noise_func
         self.goal_velocity = goal_velocity
         self.no_penalty = no_penalty
@@ -24,6 +30,8 @@ class StochasticMountainCar(gym.Env):
         self.env.no_penalty = self.no_penalty
         self.action_space = self.env.action_space
         self.observation_space = self.env.observation_space
+        self.max_threshold = max_threshold
+        self.min_threshold = min_threshold
 
     def seed(self, seed=None):
         return self.env.seed(seed)
@@ -68,3 +76,9 @@ class StochasticMountainCar(gym.Env):
         n = np.random.normal(0, max(diff * self.heteroscedastic_std, self.heteroscedastic_min_std), size=state.shape)
         #print(n)
         return n
+
+    def threshold_noise(self,state):
+        if state[0] <= self.max_threshold and state[0] >= self.min_threshold:
+            n = np.random.normal(0,self.uniform_std,size=state.shape)
+            return n
+        return 0
