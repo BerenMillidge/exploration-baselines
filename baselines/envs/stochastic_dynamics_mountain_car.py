@@ -43,6 +43,9 @@ class StochasticMountainCar(gym.Env):
         if noise_func == "heteroscedastic":
             self.noise_func = self.heteroscedastic_position_noise
 
+        if noise_func == "threshold":
+            self.noise_func = self.threshold_noise
+
 
 
     def reset(self):
