@@ -12,6 +12,7 @@ try:
         SparseDoublePendulum,
         SparseHalfCheetah,
         SparseBipedalWalker,
+        StochasticMountainCar
         const,
     )
 except:
@@ -19,6 +20,7 @@ except:
         SparseMountainCar,
         SparseDoublePendulum,
         SparseBipedalWalker,
+        StochasticMountainCar
         const,
     )
 
@@ -27,7 +29,7 @@ class TorchEnv(object):
     def __init__(
         self, env_name, max_episode_len, action_repeat=1, device="cpu",return_torch=False, seed=None
     ):
-        
+
         print(env_name)
         print(const.SPARSE_CARTPOLE_SWINGUP)
         print(env_name == const.SPARSE_CARTPOLE_SWINGUP)
@@ -42,6 +44,8 @@ class TorchEnv(object):
             self._env = SparseHalfCheetah()
         elif env_name == const.SPARSE_BIPEDAL_WALKER:
             self._env = SparseBipedalWalker()
+        elif env_name == const.STOCHASTIC_MOUNTAIN_CAR:
+            self._env = StochasticMountainCar()
         else:
             self._env = gym.make(env_name)
 
