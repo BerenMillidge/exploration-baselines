@@ -15,7 +15,7 @@ except:
   from .double_pendulum import SparseDoublePendulum
   from .bipedal_walker import SparseBipedalWalker
   from .stochastic_dynamics_mountain_car import StochasticMountainCar
-  from .sparse_lunar_lander import SparseLunarLander
+  from .sparse_lunar_lander import SparseLunarLander, SparseLunarLanderContinuous
   from .goal_directed_gridworld import GridWorldSearch
 
 from .torch_env import TorchEnv
