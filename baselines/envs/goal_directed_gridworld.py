@@ -29,7 +29,7 @@ class GridWorldSearch(gym.Env):
 
         self.seed()
         self.reset()
-        self.state = np.zeros([4,1])
+        self.state = np.zeros([4,])
         self.done=False
 
     def seed(self, seed=None):
@@ -37,7 +37,7 @@ class GridWorldSearch(gym.Env):
         return [seed]
 
     def reset(self):
-        self.state = np.random.normal(0,0.01, size=(4,1))
+        self.state = np.random.normal(0,0.01, size=(4,))
         self.done = False
         return self.state
 
@@ -68,7 +68,7 @@ class GridWorldSearch(gym.Env):
         if self.num_steps >= self.max_len:
             self.done=True
             self.num_steps = 0
-        self.state = np.array([xpos, ypos, velx, vely])
+        self.state = np.array([xpos, ypos, velx, vely]).reshape((4,))
         return self.state, reward, self.done, {}
 
 
