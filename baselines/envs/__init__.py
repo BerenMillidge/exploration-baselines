@@ -7,7 +7,7 @@ try:
   from .half_cheetah import SparseHalfCheetah
   from .bipedal_walker import SparseBipedalWalker
   from .stochastic_dynamics_mountain_car import StochasticMountainCar
-  from .sparse_lunar_lander import SparseLunarLander
+  from .sparse_lunar_lander import SparseLunarLander, SparseLunarLanderContinuous
   from .goal_directed_gridworld import GridWorldSearch
 except:
   print("Cannot import roboschool: only importing those envs which don't require it")

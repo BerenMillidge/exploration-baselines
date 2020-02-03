@@ -355,7 +355,7 @@ class SparseLunarLander(gym.Env, EzPickle):
             self.viewer.close()
             self.viewer = None
 
-class LunarLanderContinuous(SparseLunarLander):
+class SparseLunarLanderContinuous(SparseLunarLander):
     continuous = True
 
 def heuristic(env, s):

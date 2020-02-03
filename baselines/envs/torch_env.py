@@ -14,6 +14,7 @@ try:
         SparseBipedalWalker,
         StochasticMountainCar,
         SparseLunarLander,
+        SparseLunarLanderContinuous,
         GridWorldSearch,
         const,
     )
@@ -24,6 +25,7 @@ except:
         SparseBipedalWalker,
         StochasticMountainCar,
         SparseLunarLander,
+        SparseLunarLanderContinuous,
         GridWorldSearch,
         const,
     )
@@ -52,6 +54,8 @@ class TorchEnv(object):
             self._env = StochasticMountainCar()
         elif env_name == const.SPARSE_LUNAR_LANDER:
             self._env = SparseLunarLander()
+        elif env_name == const.SPARSE_LUNAR_LANDER_CONTINUOUS:
+            self._env = SparseLunarLanderContinuous()
         elif env_name == const.GRID_WORLD_SEARCH:
             self._env = GridWorldSearch()
         else:
