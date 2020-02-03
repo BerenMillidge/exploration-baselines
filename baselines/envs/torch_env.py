@@ -13,7 +13,7 @@ try:
         SparseHalfCheetah,
         SparseBipedalWalker,
         StochasticMountainCar,
-        SparseLunarLander
+        SparseLunarLander,
         const,
     )
 except:
@@ -22,7 +22,7 @@ except:
         SparseDoublePendulum,
         SparseBipedalWalker,
         StochasticMountainCar,
-        SparseLunarLander
+        SparseLunarLander,
         const,
     )
 
