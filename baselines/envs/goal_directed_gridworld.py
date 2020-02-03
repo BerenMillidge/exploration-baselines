@@ -5,7 +5,7 @@ import numpy as np
 class GridWorldSearch(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"], "video.frames_per_second": 30}
 
-    def __init__(self, xwidth=50, ywidth=50, velocity_lim=5, random_goal=False, goal_position=[30,-45],action_lim=1,goal_threshold=1,max_len=500):
+    def __init__(self, xwidth=50, ywidth=50, velocity_lim=5, random_goal=False, goal_position=[30,-45],action_lim=1,goal_threshold=1,max_len=1000):
         self.xwidth =xwidth
         self.ywidth = ywidth
         self.velocity_lim = velocity_lim
@@ -15,10 +15,10 @@ class GridWorldSearch(gym.Env):
         self.goal_threshold = goal_threshold
         self.max_len = max_len
         self.num_steps = 0
-        self.dt = 0.1
+        self.dt = 1
 
-        self.low_state = np.array([-self.xwidth,-self.ywidth, -self.velocity_lim])
-        self.high_state = np.array([self.xwidth,self.ywidth, self.velocity_lim])
+        self.low_state = np.array([-self.xwidth,-self.ywidth, -self.velocity_lim,-self.velocity_lim])
+        self.high_state = np.array([self.xwidth,self.ywidth, self.velocity_lim,self.velocity_lim])
         self.action_space = gym.spaces.Box(low=-self.action_lim, high=self.action_lim, shape=(2,),dtype=np.float32)
         self.observation_space = gym.spaces.Box(low=self.low_state, high=self.high_state, dtype=np.float32)
 
@@ -46,6 +46,7 @@ class GridWorldSearch(gym.Env):
         a_x,a_y = action
         a_x = min(max(a_x,-self.action_lim), self.action_lim)
         a_y = min(max(a_y,-self.action_lim), self.action_lim)
+        print("as: ",a_x, a_y)
         xpos, ypos, velx,vely = self.state
         velx = self.dt * a_x
         vely = self.dt * a_y
