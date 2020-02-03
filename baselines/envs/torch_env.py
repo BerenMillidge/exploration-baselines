@@ -14,6 +14,7 @@ try:
         SparseBipedalWalker,
         StochasticMountainCar,
         SparseLunarLander,
+        GridWorldSearch,
         const,
     )
 except:
@@ -23,6 +24,7 @@ except:
         SparseBipedalWalker,
         StochasticMountainCar,
         SparseLunarLander,
+        GridWorldSearch,
         const,
     )
 
@@ -50,6 +52,8 @@ class TorchEnv(object):
             self._env = StochasticMountainCar()
         elif env_name == const.SPARSE_LUNAR_LANDER:
             self._env = SparseLunarLander()
+        elif env_name == const.GRID_WORLD_SEARCH:
+            self._env = GridWorldSearch()
         else:
             self._env = gym.make(env_name)
 
