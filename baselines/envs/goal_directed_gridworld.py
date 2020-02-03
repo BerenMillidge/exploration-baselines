@@ -46,7 +46,7 @@ class GridWorldSearch(gym.Env):
         a_x,a_y = action
         a_x = min(max(a_x,-self.action_lim), self.action_lim)
         a_y = min(max(a_y,-self.action_lim), self.action_lim)
-        print("as: ",a_x, a_y)
+        #print("as: ",a_x, a_y)
         xpos, ypos, velx,vely = self.state
         velx = self.dt * a_x
         vely = self.dt * a_y
