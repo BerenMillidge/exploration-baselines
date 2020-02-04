@@ -16,6 +16,7 @@ try:
         SparseLunarLander,
         SparseLunarLanderContinuous,
         GridWorldSearch,
+        AcrobotEnv,
         const,
     )
 except:
@@ -27,6 +28,7 @@ except:
         SparseLunarLander,
         SparseLunarLanderContinuous,
         GridWorldSearch,
+        AcrobotEnv,
         const,
     )
 
@@ -58,6 +60,8 @@ class TorchEnv(object):
             self._env = SparseLunarLanderContinuous()
         elif env_name == const.GRID_WORLD_SEARCH:
             self._env = GridWorldSearch()
+        elif env_name == const.ACROBOT:
+            self._env = AcrobotEnv
         else:
             self._env = gym.make(env_name)
 
