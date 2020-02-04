@@ -61,7 +61,7 @@ class TorchEnv(object):
         elif env_name == const.GRID_WORLD_SEARCH:
             self._env = GridWorldSearch()
         elif env_name == const.ACROBOT:
-            self._env = AcrobotEnv
+            self._env = AcrobotEnv()
         else:
             self._env = gym.make(env_name)
 
