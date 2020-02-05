@@ -38,7 +38,7 @@ class RewardGradientGridWorld(gym.Env):
 
     def reward_fun(self,xpos, ypos):
         # simplest possible linear gradient
-        return reward_gradient * ypos
+        return self.reward_gradient * ypos
 
     def step(self, action):
         #clip action
