@@ -12,7 +12,6 @@ class RewardGradientGridWorld(gym.Env):
         self.velocity_lim = velocity_lim
         self.reward_gradient = reward_gradient
         self.action_lim = action_lim
-        self.goal_threshold = goal_threshold
         self.max_len = max_len
         self.num_steps = 0
         self.dt = 1
