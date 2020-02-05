@@ -16,6 +16,7 @@ try:
         SparseLunarLander,
         SparseLunarLanderContinuous,
         GridWorldSearch,
+        RewardGradientGridWorld,
         AcrobotEnv,
         const,
     )
@@ -28,6 +29,7 @@ except:
         SparseLunarLander,
         SparseLunarLanderContinuous,
         GridWorldSearch,
+        RewardGradientGridWorld,
         AcrobotEnv,
         const,
     )
@@ -60,6 +62,8 @@ class TorchEnv(object):
             self._env = SparseLunarLanderContinuous()
         elif env_name == const.GRID_WORLD_SEARCH:
             self._env = GridWorldSearch()
+        elif env_name == const.REWARD_GRADIENT_GRIDWORLD:
+            self._env = RewardGradientGridWorld()
         elif env_name == const.ACROBOT:
             self._env = AcrobotEnv()
         else:

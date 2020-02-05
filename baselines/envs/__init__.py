@@ -9,6 +9,7 @@ try:
   from .stochastic_dynamics_mountain_car import StochasticMountainCar
   from .sparse_lunar_lander import SparseLunarLander, SparseLunarLanderContinuous
   from .goal_directed_gridworld import GridWorldSearch
+  from .reward_gradient_gridworld import RewardGradientGridWorld
   from .acrobot import AcrobotEnv
 except:
   print("Cannot import roboschool: only importing those envs which don't require it")
@@ -18,6 +19,7 @@ except:
   from .stochastic_dynamics_mountain_car import StochasticMountainCar
   from .sparse_lunar_lander import SparseLunarLander, SparseLunarLanderContinuous
   from .goal_directed_gridworld import GridWorldSearch
+  from .reward_gradient_gridworld import RewardGradientGridWorld
   from .acrobot import AcrobotEnv
 
 from .torch_env import TorchEnv
