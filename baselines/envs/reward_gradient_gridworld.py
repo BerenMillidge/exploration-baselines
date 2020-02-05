@@ -22,10 +22,6 @@ class RewardGradientGridWorld(gym.Env):
         self.observation_space = gym.spaces.Box(low=self.low_state, high=self.high_state, dtype=np.float32)
 
         self.viewer = None
-        if self.random_goal:
-            self.goal_position = np.random.uniform(low=np.array([-self.xwidth, -self.ywidth]),high=np.array([self.xwidth,self.ywidth]),shape=(2,1))
-        self.goalx, self.goaly = self.goal_position
-
         self.seed()
         self.reset()
         self.state = np.zeros([4,])
