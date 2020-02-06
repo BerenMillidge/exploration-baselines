@@ -19,6 +19,8 @@ try:
         RewardGradientGridWorld,
         BipedalWalker,
         AcrobotEnv,
+        LunarLander,
+        LunarLanderContinuous,
         const,
     )
 except:
@@ -33,6 +35,8 @@ except:
         RewardGradientGridWorld,
         BipedalWalker,
         AcrobotEnv,
+        LunarLander,
+        LunarLanderContinuous,
         const,
     )
 
@@ -70,6 +74,10 @@ class TorchEnv(object):
             self._env = AcrobotEnv()
         elif env_name == const.BIPEDALWALKER:
             self._env = BipedalWalker()
+        elif env_name == const.LUNARLANDER:
+            self._env = LunarLander()
+        elif env_name == const.LUNARLANDERCONTINUOUS:
+            self._env = LunarLanderContinuous()
         else:
             self._env = gym.make(env_name)
 

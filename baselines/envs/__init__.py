@@ -12,6 +12,7 @@ try:
   from .reward_gradient_gridworld import RewardGradientGridWorld
   from .acrobot import AcrobotEnv
   from .bipedal_walker_reward import BipedalWalker
+  from .lunar_lander import LunarLander, LunarLanderContinuous
 except:
   print("Cannot import roboschool: only importing those envs which don't require it")
   from .mountain_car import SparseMountainCar
@@ -23,6 +24,7 @@ except:
   from .reward_gradient_gridworld import RewardGradientGridWorld
   from .acrobot import AcrobotEnv
   from .bipedal_walker_reward import BipedalWalker
+  from .lunar_lander import LunarLander, LunarLanderContinuous
 
 from .torch_env import TorchEnv
 from .wrappers import Wrapper, NoisyEnv
