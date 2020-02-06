@@ -11,6 +11,7 @@ try:
   from .goal_directed_gridworld import GridWorldSearch
   from .reward_gradient_gridworld import RewardGradientGridWorld
   from .acrobot import AcrobotEnv
+  from .bipedal_walker_reward import BipedalWalker
 except:
   print("Cannot import roboschool: only importing those envs which don't require it")
   from .mountain_car import SparseMountainCar
@@ -21,6 +22,7 @@ except:
   from .goal_directed_gridworld import GridWorldSearch
   from .reward_gradient_gridworld import RewardGradientGridWorld
   from .acrobot import AcrobotEnv
+  from .bipedal_walker_reward import BipedalWalker
 
 from .torch_env import TorchEnv
 from .wrappers import Wrapper, NoisyEnv
