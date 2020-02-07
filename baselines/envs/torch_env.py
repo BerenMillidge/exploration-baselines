@@ -40,6 +40,11 @@ except:
         const,
     )
 
+try:
+    import pybulletgym
+except:
+    print("Pybulletgym not installed. Oh well.")
+    pass
 
 class TorchEnv(object):
     def __init__(

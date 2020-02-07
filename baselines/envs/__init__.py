@@ -28,3 +28,8 @@ except:
 
 from .torch_env import TorchEnv
 from .wrappers import Wrapper, NoisyEnv
+try:
+    import pybulletgym
+except:
+    print("Pybulletgym not installed. Oh well.")
+    pass
