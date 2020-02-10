@@ -29,7 +29,12 @@ except:
 from .torch_env import TorchEnv
 from .wrappers import Wrapper, NoisyEnv
 try:
-    import pybulletgym
+    import pybullet
 except:
-    print("Pybulletgym not installed. Oh well.")
+    print("pybullet not installed. Oh well.")
+    pass
+try:
+    import pybullet_env
+except:
+    print("pybullet_envs not installed. Oh well.")
     pass

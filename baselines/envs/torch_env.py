@@ -41,11 +41,15 @@ except:
     )
 
 try:
-    import pybulletgym
+    import pybullet
 except:
-    print("Pybulletgym not installed. Oh well.")
+    print("Pybullet not installed. Oh well.")
     pass
-
+try:
+    import pybullet_envs
+except:
+    print("pybullet_envs not installed. Oh well.")
+    pass
 class TorchEnv(object):
     def __init__(
         self, env_name, max_episode_len, action_repeat=1, device="cpu",return_torch=False, seed=None
