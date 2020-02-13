@@ -122,6 +122,8 @@ class SparseBipedalWalker(gym.Env, EzPickle):
             np.array([-1, -1, -1, -1]), np.array([1, 1, 1, 1]), dtype=np.float32
         )
         self.observation_space = spaces.Box(-high, high, dtype=np.float32)
+        self.max_reward = 1
+        self.min_reward = 0
 
     def seed(self, seed=None):
         self.np_random, seed = seeding.np_random(seed)
@@ -538,4 +540,3 @@ class SparseBipedalWalker(gym.Env, EzPickle):
         if self.viewer is not None:
             self.viewer.close()
             self.viewer = None
-

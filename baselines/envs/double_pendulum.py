@@ -13,13 +13,13 @@ class SparseDoublePendulum(core.Env):
 
     dt = .2
 
-    LINK_LENGTH_1 = 1.  
-    LINK_LENGTH_2 = 1. 
-    LINK_MASS_1 = 1.  
-    LINK_MASS_2 = 1. 
-    LINK_COM_POS_1 = 0.5  
-    LINK_COM_POS_2 = 0.5  
-    LINK_MOI = 1.  
+    LINK_LENGTH_1 = 1.
+    LINK_LENGTH_2 = 1.
+    LINK_MASS_1 = 1.
+    LINK_MASS_2 = 1.
+    LINK_COM_POS_1 = 0.5
+    LINK_COM_POS_2 = 0.5
+    LINK_MOI = 1.
     MAX_VEL_1 = 4 * pi
     MAX_VEL_2 = 9 * pi
 
@@ -39,6 +39,8 @@ class SparseDoublePendulum(core.Env):
         self.observation_space = spaces.Box(low=low, high=high, dtype=np.float32)
         self.action_space = spaces.Box(low=action_low, high=action_high, dtype=np.float32)
         self.state = None
+        self.max_reward = 1
+        self.min_reward = 0
         self.seed()
 
     def seed(self, seed=None):
@@ -77,8 +79,8 @@ class SparseDoublePendulum(core.Env):
     def _get_ob(self):
         s = self.state
         return np.array([cos(s[0]), sin(s[0]), cos(s[1]), sin(s[1]), s[2], s[3]])
-    
-    
+
+
     def undo_obs(self,obs):
         return np.array([np.arccos(obs[0]),np.arccos(obs[2]),obs[4],obs[5]])
 

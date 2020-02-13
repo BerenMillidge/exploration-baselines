@@ -92,6 +92,8 @@ class AcrobotEnv(core.Env):
         self.observation_space = spaces.Box(low=low, high=high, dtype=np.float32)
         self.action_space = spaces.Box(low=action_low, high=action_high, dtype=np.float32)
         self.state = None
+        self.max_reward = 1
+        self.min_reward = 0
         self.seed()
 
     def seed(self, seed=None):

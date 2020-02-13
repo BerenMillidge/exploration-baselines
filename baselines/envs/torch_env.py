@@ -95,6 +95,15 @@ class TorchEnv(object):
         self.done = False
         self.device = device
         self.return_torch = return_torch
+        # get maximum and minimum reward estimates for the environment, if they exist
+        try:
+            self.max_reward = self._env.max_reward
+        except:
+            self.max_reward = None
+        try:
+            self.min_reward = self._env.max_reward
+        except:
+            self.min_reward = None
         if seed is not None:
             self._env.seed(seed)
         self.t = 0
@@ -155,3 +164,11 @@ class TorchEnv(object):
     @property
     def observation_space(self):
         return self._env.observation_space
+
+    @property
+    def max_reward(self):
+        return self.max_reward
+
+    @property
+    def min_reward(self):
+        return self.min_reward

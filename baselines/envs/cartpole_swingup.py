@@ -12,6 +12,8 @@ class SparseCartpoleSwingup(RoboschoolMujocoXmlEnv):
             self, "inverted_pendulum.xml", "cart", action_dim=1, obs_dim=5
         )
         self.threshold = 0.8
+        self.max_reward = 1
+        self.min_reward = 0
 
     def create_single_player_scene(self):
         return SingleRobotEmptyScene(gravity=9.8, timestep=0.0165, frame_skip=1)
@@ -55,4 +57,3 @@ class SparseCartpoleSwingup(RoboschoolMujocoXmlEnv):
 
     def camera_adjust(self):
         self.camera.move_and_look_at(0.0, 1.2, 1.0, 0.0, 0, 0.5)
-

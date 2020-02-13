@@ -27,6 +27,8 @@ class SparseMountainCar(gym.Env):
         self.observation_space = gym.spaces.Box(
             low=self.low_state, high=self.high_state, dtype=np.float32
         )
+        self.max_reward = 1
+        self.min_reward = 0
 
         self.seed()
         self.reset()
