@@ -147,3 +147,11 @@ class TorchEnv(object):
     @property
     def action_dims(self):
         return self._env.action_space.shape
+
+    @property
+    def action_space(self):
+        return self._env.action_space
+
+    @property
+    def observation_space(self):
+        return self._env.observation_space
