@@ -164,11 +164,3 @@ class TorchEnv(object):
     @property
     def observation_space(self):
         return self._env.observation_space
-
-    @property
-    def max_reward(self):
-        return self.max_reward
-
-    @property
-    def min_reward(self):
-        return self.min_reward
