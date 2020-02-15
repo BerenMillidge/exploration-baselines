@@ -50,6 +50,14 @@ try:
 except:
     print("pybullet_envs not installed. Oh well.")
     pass
+
+try:
+    import pybulletgym
+except:
+    print("Failed to install pybullet gym. Oh well.")
+    pass
+
+
 class TorchEnv(object):
     def __init__(
         self, env_name, max_episode_len, action_repeat=1, device="cpu",return_torch=False, seed=None
