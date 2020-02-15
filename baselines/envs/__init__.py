@@ -38,3 +38,8 @@ try:
 except:
     print("pybullet_envs not installed. Oh well.")
     pass
+try:
+    import pybulletgym
+except:
+    print("Failed to install pybullet gym. Oh well.")
+    pass
