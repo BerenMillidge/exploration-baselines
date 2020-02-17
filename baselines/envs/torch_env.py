@@ -50,14 +50,6 @@ try:
 except:
     print("pybullet_envs not installed. Oh well.")
     pass
-
-try:
-    import pybulletgym
-except:
-    print("Failed to install pybullet gym. Oh well.")
-    pass
-
-
 class TorchEnv(object):
     def __init__(
         self, env_name, max_episode_len, action_repeat=1, device="cpu",return_torch=False, seed=None
@@ -104,16 +96,8 @@ class TorchEnv(object):
         self.device = device
         self.return_torch = return_torch
         # get maximum and minimum reward estimates for the environment, if they exist
-        try:
-            self.max_reward = self._env.max_reward
-        except:
-            self.max_reward = None
-        try:
-            self.min_reward = self._env.max_reward
-        except:
-            self.min_reward = None
-        if seed is not None:
-            self._env.seed(seed)
+        self._try_set_env_values()
+
         self.t = 0
 
     def reset(self):
@@ -156,6 +140,26 @@ class TorchEnv(object):
 
     def close(self):
         self._env.close()
+
+    def _try_set_env_values(self):
+        try:
+            self.max_reward = self._env.max_reward
+        except:
+            self.max_reward = None
+        try:
+            self.min_reward = self._env.min_reward
+        except:
+            self.min_reward = None
+        try:
+            self.max_action = self._env.max_action
+        except:
+            self.max_action = None
+        try:
+            self.min_action = self._env.min_action
+        except:
+            self.min_action = None
+
+
 
     @property
     def state_dims(self):
