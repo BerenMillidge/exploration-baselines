@@ -111,7 +111,8 @@ class TorchEnv(object):
 
     def step(self, action):
         if self.return_torch:
-            action = action.cpu().detach().numpy()
+            if isinstance(action, type(torch.empty([0,0]))):
+                action = action.cpu().detach().numpy()
         reward = 0
 
         for _ in range(self.action_repeat):
