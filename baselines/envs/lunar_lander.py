@@ -339,10 +339,10 @@ class LunarLander(gym.Env, EzPickle):
         self.lander.linearVelocity.y = vely
         self.lander.angle = float(angle)
         self.lander.angularVelocity = float(angular_velocity)
-        print("position: ", (posx, posy))
-        print("angle: ", angle)
-        print("lander position: ", lander.position)
-        print("lander angle: ", lander.angle)
+        #print("position: ", (posx, posy))
+        #print("angle: ", angle)
+        #print("lander position: ", lander.position)
+        #print("lander angle: ", lander.angle)
         if left_leg == 1:
             self.legs[0].ground_contact = True
         else:
