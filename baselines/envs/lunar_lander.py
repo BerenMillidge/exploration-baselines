@@ -332,20 +332,31 @@ class LunarLander(gym.Env, EzPickle):
         vely = (vely * FPS)/(VIEWPORT_H/SCALE/2)
         angular_velocity = (angular_velocity /20)* FPS
         #print("ANGLE: ", angle, type(angle))
-        self.lander.position.x = posx
-        self.lander.position.y = posy
-        self.lander.linearVelocity.x = velx
-        self.lander.linearVelocity.y = vely
-        self.lander.angle = float(angle)
-        self.lander.angularVelocity = float(angular_velocity)
+        lander = deepcopy(self.lander)
+        legs = deepcopy(self.legs)
+        lander.position.x = posx
+        lander.position.y = posy
+        lander.linearVelocity.x = velx
+        lander.linearVelocity.y = vely
+        lander.angle = float(angle)
+        lander.angularVelocity = float(angular_velocity)
+        print("position: ", (posx, posy))
+        print("angle: ", angle)
+        print("lander position: ", lander.position)
+        print("lander angle: ", lander.angle)
+        self.lander = None
+        self.legs = None
         if left_leg == 1:
-            self.legs[0].ground_contact = True
+            legs[0].ground_contact = True
         else:
-            self.legs[0].ground_contact = False
+            legs[0].ground_contact = False
         if right_leg ==1:
-            self.legs[1].ground_contact=True
+            legs[1].ground_contact=True
         else:
-            self.legs[1].ground_contact=False
+            legs[1].ground_contact=False
+            
+        self.lander = lander
+        self.legs = legs
         
     def render(self, mode='human'):
         from gym.envs.classic_control import rendering
