@@ -8,6 +8,7 @@ from Box2D.b2 import (edgeShape, circleShape, fixtureDef, polygonShape, revolute
 import gym
 from gym import spaces
 from gym.utils import seeding, EzPickle
+from copy import deepcopy
 
 # Rocket trajectory optimization is a classic topic in Optimal Control.
 #
