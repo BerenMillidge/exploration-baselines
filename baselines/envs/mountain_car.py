@@ -70,6 +70,9 @@ class SparseMountainCar(gym.Env):
     
     def state_from_obs(self,obs):
         return obs
+    
+    def set_state(self, state):
+        self.state = state
 
     def _height(self, xs):
         return np.sin(3 * xs) * 0.45 + 0.55
