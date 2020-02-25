@@ -67,6 +67,9 @@ class SparseMountainCar(gym.Env):
     def reset(self):
         self.state = np.array([self.np_random.uniform(low=-0.6, high=-0.4), 0])
         return np.array(self.state)
+    
+    def state_from_obs(obs):
+        return obs
 
     def _height(self, xs):
         return np.sin(3 * xs) * 0.45 + 0.55
