@@ -351,6 +351,13 @@ class LunarLander(gym.Env, EzPickle):
             self.legs[1].ground_contact=True
         else:
             self.legs[1].ground_contact=False
+            
+        self.legs[0].position.x = posx + LEG_AWAY/SCALE
+        self.legs[0].position.y = posy
+        self.legs[1].position.x = posx - LEG_AWAY/SCALE
+        self.legs[1].position.y = posy
+            
+        
 
         
     def render(self, mode='human'):
