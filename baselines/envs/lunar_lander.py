@@ -282,7 +282,9 @@ class LunarLander(gym.Env, EzPickle):
         self.world.Step(1.0/FPS, 6*30, 2*30)
 
         pos = self.lander.position
+        print("ll pos: ", pos)
         vel = self.lander.linearVelocity
+        print("ll vel: ", vel)
         state = [
             (pos.x - VIEWPORT_W/SCALE/2) / (VIEWPORT_W/SCALE/2),
             (pos.y - (self.helipad_y+LEG_DOWN/SCALE)) / (VIEWPORT_H/SCALE/2),
