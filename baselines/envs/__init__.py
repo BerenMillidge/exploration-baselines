@@ -13,6 +13,7 @@ try:
   from .acrobot import AcrobotEnv
   from .bipedal_walker_reward import BipedalWalker
   from .lunar_lander import LunarLander, LunarLanderContinuous
+  from .pendulum import PendulumEnv
 except:
   print("Cannot import roboschool: only importing those envs which don't require it")
   from .mountain_car import SparseMountainCar
@@ -25,6 +26,7 @@ except:
   from .acrobot import AcrobotEnv
   from .bipedal_walker_reward import BipedalWalker
   from .lunar_lander import LunarLander, LunarLanderContinuous
+  from .pendulum import PendulumEnv
 
 from .torch_env import TorchEnv
 from .wrappers import Wrapper, NoisyEnv
@@ -37,9 +39,4 @@ try:
     import pybullet_env
 except:
     print("pybullet_envs not installed. Oh well.")
-    pass
-try:
-    import pybulletgym
-except:
-    print("Failed to install pybullet gym. Oh well.")
     pass

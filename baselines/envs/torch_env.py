@@ -21,6 +21,7 @@ try:
         AcrobotEnv,
         LunarLander,
         LunarLanderContinuous,
+        PendulumEnv,
         const,
     )
 except:
@@ -37,6 +38,7 @@ except:
         AcrobotEnv,
         LunarLander,
         LunarLanderContinuous,
+        PendulumEnv,
         const,
     )
 
@@ -87,6 +89,8 @@ class TorchEnv(object):
             self._env = LunarLander()
         elif env_name == const.LUNARLANDERCONTINUOUS:
             self._env = LunarLanderContinuous()
+        elif env_name == const.PENDULUM:
+            self._env = PendulumEnv()
         else:
             self._env = gym.make(env_name)
 
@@ -111,8 +115,7 @@ class TorchEnv(object):
 
     def step(self, action):
         if self.return_torch:
-            if isinstance(action, type(torch.empty([0,0]))):
-                action = action.cpu().detach().numpy()
+            action = action.cpu().detach().numpy()
         reward = 0
 
         for _ in range(self.action_repeat):
