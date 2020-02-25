@@ -318,7 +318,32 @@ class LunarLander(gym.Env, EzPickle):
             done   = True
             reward = +100
         return np.array(state, dtype=np.float32), reward, done, {}
-
+    
+    def state_from_obs(self, obs):
+        return obs
+    
+    def set_state(self, state):
+        posx, posy, velx, vely, angle, angular_velocity, left_leg, right_leg = state
+        posx = (posx * (VIEWPORT_W/SCALE/2)) + VIEWPORT_W/SCALE/2
+        posy = (posy * (VIEWPORT_H/SCALE/2)) + (self.helipad_y + LEG_DOWN/SCALE)
+        velx = (velx * FPS)/(VIEWPORT_W/SCALE/2)
+        vely = (vely * FPS)/(VIEWPORT_H/SCALE/2)
+        angular_velocity = (angular_velocity /20)* FPS
+        self.lander.position.x = posx
+        self.lander.position.y = posy
+        self.lander.linearVelocity.x = velx
+        self.lander.linearVelocity.y = vely
+        self.lander.angle = angle
+        self.lander.angularVelocity = angular_velocity
+        if left_leg == 1:
+            self.legs[0].ground_contact = True
+        else:
+            self.legs[0].ground_contact = False
+        if right_leg ==1:
+            self.legs[1].ground_contact=True
+        else:
+            self.legs[1].ground_contact=False
+        
     def render(self, mode='human'):
         from gym.envs.classic_control import rendering
         if self.viewer is None:
