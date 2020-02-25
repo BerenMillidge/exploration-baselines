@@ -333,8 +333,8 @@ class LunarLander(gym.Env, EzPickle):
         vely = (vely * FPS)/(VIEWPORT_H/SCALE/2)
         angular_velocity = (angular_velocity /20)* FPS
         #print("ANGLE: ", angle, type(angle))
-        lander = deepcopy(self.lander)
-        legs = deepcopy(self.legs)
+        lander = self.lander
+        legs = self.legs
         lander.position.x = posx
         lander.position.y = posy
         lander.linearVelocity.x = velx
