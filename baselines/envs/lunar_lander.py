@@ -383,6 +383,7 @@ class LunarLander(gym.Env, EzPickle):
             leg.joint = self.world.CreateJoint(rjd)
             self.legs.append(leg)
             
+        print("legs: ", self.legs)
         if left_leg == 1:
             self.legs[0].ground_contact = True
         else:
