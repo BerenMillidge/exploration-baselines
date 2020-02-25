@@ -79,6 +79,9 @@ class SparseDoublePendulum(core.Env):
     def _get_ob(self):
         s = self.state
         return np.array([cos(s[0]), sin(s[0]), cos(s[1]), sin(s[1]), s[2], s[3]])
+    
+    def state_from_obs(self, obs):
+        return np.array([np.arccos(obs[0]), np.arccos(obs[2]),obs[4],obs[5]])
 
 
     def undo_obs(self,obs):
