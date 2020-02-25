@@ -336,8 +336,8 @@ class LunarLander(gym.Env, EzPickle):
         self.lander.position.y = posy
         self.lander.linearVelocity.x = velx
         self.lander.linearVelocity.y = vely
-        self.lander.angle = angle
-        self.lander.angularVelocity = angular_velocity
+        self.lander.angle = float(angle)
+        self.lander.angularVelocity = float(angular_velocity)
         if left_leg == 1:
             self.legs[0].ground_contact = True
         else:
