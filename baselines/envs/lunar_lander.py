@@ -285,6 +285,8 @@ class LunarLander(gym.Env, EzPickle):
         print("ll pos: ", pos)
         vel = self.lander.linearVelocity
         print("ll vel: ", vel)
+        print("angle: ", self.lander.angle, type(self.lander.angle))
+        print("angular vel: ", self.lander.angularVelocity, type(self.lander.angularVelocity))
         state = [
             (pos.x - VIEWPORT_W/SCALE/2) / (VIEWPORT_W/SCALE/2),
             (pos.y - (self.helipad_y+LEG_DOWN/SCALE)) / (VIEWPORT_H/SCALE/2),
