@@ -343,6 +343,46 @@ class LunarLander(gym.Env, EzPickle):
         #print("angle: ", angle)
         #print("lander position: ", lander.position)
         #print("lander angle: ", lander.angle)
+
+        #self.legs[0].position.x = posx + LEG_AWAY/SCALE
+        #self.legs[0].position.y = posy
+        #self.legs[1].position.x = posx - LEG_AWAY/SCALE
+        #self.legs[1].position.y = posy
+        
+        self.legs = []
+        for i in [-1,+1]:
+            leg = self.world.CreateDynamicBody(
+                position = (posx - i*LEG_AWAY/SCALE, posy),
+                angle = (i*0.05),
+                fixtures = fixtureDef(
+                    shape=polygonShape(box=(LEG_W/SCALE, LEG_H/SCALE)),
+                    density=1.0,
+                    restitution=0.0,
+                    categoryBits=0x0020,
+                    maskBits=0x001)
+                )
+            leg.ground_contact = False
+            leg.color1 = (0.5,0.4,0.9)
+            leg.color2 = (0.3,0.3,0.5)
+            rjd = revoluteJointDef(
+                bodyA=self.lander,
+                bodyB=leg,
+                localAnchorA=(0, 0),
+                localAnchorB=(i*LEG_AWAY/SCALE, LEG_DOWN/SCALE),
+                enableMotor=True,
+                enableLimit=True,
+                maxMotorTorque=LEG_SPRING_TORQUE,
+                motorSpeed=+0.3*i  # low enough not to jump back into the sky
+                )
+            if i==-1:
+                rjd.lowerAngle = +0.9 - 0.5  # Yes, the most esoteric numbers here, angles legs have freedom to travel within
+                rjd.upperAngle = +0.9
+            else:
+                rjd.lowerAngle = -0.9
+                rjd.upperAngle = -0.9 + 0.5
+            leg.joint = self.world.CreateJoint(rjd)
+            self.legs.append(leg)
+            
         if left_leg == 1:
             self.legs[0].ground_contact = True
         else:
@@ -352,10 +392,6 @@ class LunarLander(gym.Env, EzPickle):
         else:
             self.legs[1].ground_contact=False
             
-        self.legs[0].position.x = posx + LEG_AWAY/SCALE
-        self.legs[0].position.y = posy
-        self.legs[1].position.x = posx - LEG_AWAY/SCALE
-        self.legs[1].position.y = posy
             
         
 
