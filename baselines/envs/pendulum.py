@@ -57,6 +57,9 @@ class PendulumEnv(gym.Env):
     def _get_obs(self):
         theta, thetadot = self.state
         return np.array([np.cos(theta), np.sin(theta), thetadot])
+    
+    def set_state(self,state):
+        self.state = state
 
     def state_from_obs(self, obs):
         return np.array([np.arccos(obs[0]), obs[2]])
