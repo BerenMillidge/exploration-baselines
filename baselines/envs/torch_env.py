@@ -8,6 +8,7 @@ try:
     import roboschool
     from baselines.envs import (
         SparseMountainCar,
+        MountainCar2D,
         SparseCartpoleSwingup,
         SparseDoublePendulum,
         SparseHalfCheetah,
@@ -27,6 +28,7 @@ try:
 except:
     from baselines.envs import (
         SparseMountainCar,
+        MountainCar2D,
         SparseDoublePendulum,
         SparseBipedalWalker,
         StochasticMountainCar,
@@ -56,10 +58,6 @@ class TorchEnv(object):
     def __init__(
         self, env_name, max_episode_len, action_repeat=1, device="cpu",return_torch=False, seed=None
     ):
-
-        print(env_name)
-        print(const.SPARSE_CARTPOLE_SWINGUP)
-        print(env_name == const.SPARSE_CARTPOLE_SWINGUP)
 
         if env_name == const.SPARSE_MOUNTAIN_CAR:
             self._env = SparseMountainCar()
@@ -91,6 +89,8 @@ class TorchEnv(object):
             self._env = LunarLanderContinuous()
         elif env_name == const.PENDULUM:
             self._env = PendulumEnv()
+        elif env_name == const.MOUNTAINCAR_2D:
+            self._env=MountainCar2D
         else:
             self._env = gym.make(env_name)
 

@@ -14,6 +14,7 @@ try:
   from .bipedal_walker_reward import BipedalWalker
   from .lunar_lander import LunarLander, LunarLanderContinuous
   from .pendulum import PendulumEnv
+  from .mountaincar_2d_prototype import MountainCar2D
 except:
   print("Cannot import roboschool: only importing those envs which don't require it")
   from .mountain_car import SparseMountainCar
@@ -27,6 +28,7 @@ except:
   from .bipedal_walker_reward import BipedalWalker
   from .lunar_lander import LunarLander, LunarLanderContinuous
   from .pendulum import PendulumEnv
+  from .mountaincar_2d_prototype import MountainCar2D
 
 from .torch_env import TorchEnv
 from .wrappers import Wrapper, NoisyEnv
