@@ -90,7 +90,7 @@ class TorchEnv(object):
         elif env_name == const.PENDULUM:
             self._env = PendulumEnv()
         elif env_name == const.MOUNTAINCAR_2D:
-            self._env=MountainCar2D
+            self._env=MountainCar2D()
         else:
             self._env = gym.make(env_name)
 
