@@ -24,13 +24,13 @@ class SparseMountainCar(gym.Env):
         self.zmin = zmin
         self.zthresh = zthresh
 
-        self.low_state = np.array([self.min_position, -self.max_speed,zmin])
-        self.high_state = np.array([self.max_position, self.max_speed,zmax])
+        self.low_state = np.array([self.min_position, -self.max_speed,zmin,-1])
+        self.high_state = np.array([self.max_position, self.max_speed,zmax,1])
 
         self.viewer = None
 
         self.action_space = gym.spaces.Box(
-            low=self.min_action, high=self.max_action, shape=(1,), dtype=np.float32
+            low=self.min_action, high=self.max_action, shape=(2,), dtype=np.float32
         )
         self.observation_space = gym.spaces.Box(
             low=self.low_state, high=self.high_state, dtype=np.float32
@@ -53,7 +53,7 @@ class SparseMountainCar(gym.Env):
         zvel = min(max(action[0], -1.0), 1.0)
 
         velocity += force * self.power - 0.0025 * math.cos(3 * position)
-        zpos = min(max(zpos + zvel,zmin),zmax)
+        zpos = min(max(zpos + zvel,self.zmin),self.zmax)
         velocity = min(max(velocity, -self.max_speed),self.max_speed)
         position += velocity
         position = min(max(position, -self.max_position),self.max_position)
@@ -66,11 +66,11 @@ class SparseMountainCar(gym.Env):
         if done:
             reward = 1.0
 
-        self.state = np.array([position, velocity,zpos])
+        self.state = np.array([position, velocity,zpos,zvel])
         return self.state, reward, done, {}
 
     def reset(self):
-        self.state = np.array([self.np_random.uniform(low=-0.6, high=-0.4), 0,0])
+        self.state = np.array([self.np_random.uniform(low=-0.6, high=-0.4), 0,0,0])
         return np.array(self.state)
 
     def state_from_obs(self,obs):
