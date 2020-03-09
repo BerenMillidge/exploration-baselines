@@ -49,6 +49,7 @@ class MountainCar2D(gym.Env):
         position = self.state[0]
         velocity = self.state[1]
         zpos = self.state[2]
+        zvel = self.state[3]
         force = min(max(action[0], -1.0), 1.0)
         zvel += min(max(action[1], -1.0), 1.0) * self.power
 
