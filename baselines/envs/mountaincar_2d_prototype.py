@@ -51,7 +51,8 @@ class MountainCar2D(gym.Env):
         zpos = self.state[2]
         zvel = self.state[3]
         force = min(max(action[0], -1.0), 1.0)
-        zvel += min(max(action[1], -1.0), 1.0) * self.power
+        #zvel += min(max(action[1], -1.0), 1.0) * self.power
+        zvel = 0 # a hack to see if exploration still fails due to this even when position is fixed completely in the z plane
 
         velocity += force * self.power - 0.0025 * math.cos(3 * position)
         zpos = min(max(zpos + zvel,self.zmin),self.zmax)
