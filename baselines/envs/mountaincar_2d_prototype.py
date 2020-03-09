@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 class MountainCar2D(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"], "video.frames_per_second": 30}
 
-    def __init__(self, goal_velocity=0, no_penalty=True,zmax=10,zmin=-10,zthresh=0.5):
+    def __init__(self, goal_velocity=0, no_penalty=True,zmax=1,zmin=-1,zthresh=0.5):
         self.min_action = -1.0
         self.max_action = 1.0
         self.min_position = -1.2
@@ -50,7 +50,7 @@ class MountainCar2D(gym.Env):
         velocity = self.state[1]
         zpos = self.state[2]
         force = min(max(action[0], -1.0), 1.0)
-        zvel = min(max(action[0], -1.0), 1.0)
+        zvel += min(max(action[1], -1.0), 1.0) * self.power
 
         velocity += force * self.power - 0.0025 * math.cos(3 * position)
         zpos = min(max(zpos + zvel,self.zmin),self.zmax)
@@ -60,7 +60,7 @@ class MountainCar2D(gym.Env):
         if position == self.min_position and velocity < 0:
             velocity = 0
 
-        done = bool(position >= self.goal_position and velocity >= self.goal_velocity and self.zpos >=-self.zthresh and self.zpos <= self.zthresh )
+        done = bool(position >= self.goal_position and velocity >= self.goal_velocity) # REMOVED Z-dependence of reward. Put this back in if it succeeds like this.
 
         reward = 0
         if done:
