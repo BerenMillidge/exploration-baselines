@@ -14,8 +14,8 @@ from baselines.envs import TorchEnv
 def sac(args):
     #set seed if non default is entered
     if args.seed != -1:
-        torch.manual_seed(seed)
-        np.random.seed(seed)
+        torch.manual_seed(args.seed)
+        np.random.seed(args.seed)
 
     env, test_env = TorchEnv(args.env_name, args.max_ep_len), TorchEnv(args.env_name, args.max_ep_len)
     state_dim = env.observation_space.shape[0]
