@@ -30,7 +30,7 @@ def sac(args):
     # List of parameters for both Q-networks (save this for convenience)
     q_params = itertools.chain(ac.q1.parameters(), ac.q2.parameters())
     # Experience buffer
-    my_buffer = Buffer(state_dim,action_dim, buffer_size=args.buffer_size)
+    buffer = Buffer(state_dim,action_dim, buffer_size=args.buffer_size)
     # Set up optimizers for policy and q-function
     pi_optimizer = Adam(ac.pi.parameters(), lr=args.lr)
     q_optimizer = Adam(q_params, lr=args.lr)
@@ -91,7 +91,7 @@ def sac(args):
         # Ignore the "done" signal if it comes from hitting the time horizon (that is, when it's an artificial terminal signal that isn't based on the agent's state)
         d = False if ep_len==args.max_ep_len else d
         # Store experience to replay buffer
-        my_buffer.add(o,a,r,o2,d)
+        buffer.add(o,a,r,o2,d)
         o = o2
         # End of trajectory handling
         if d or (ep_len == args.max_ep_len):
@@ -100,9 +100,15 @@ def sac(args):
 
         # Update handling
         if t >= args.update_after and t % args.update_every == 0:
+            batch_generator = buffer.get_train_batches(args.batch_size)
             for j in range(args.update_every):
-              my_batch = my_buffer.get_train_batches(args.batch_size).__next__()
-              update(my_batch)
+              #my_batch = my_buffer.get_train_batches(args.batch_size).__next__()
+              try:
+                    batch = batch_generator.__next__()
+              except:
+                    batch_generator = buffer.get_train_batches(args.batch_size)
+                    batch = batch_generator.__next__()
+              update(batch)
 
         # End of epoch handling
         if (t+1) % args.steps_per_epoch == 0:
