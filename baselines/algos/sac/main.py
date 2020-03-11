@@ -22,7 +22,7 @@ def sac(args):
     action_dim = env.action_space.shape[0]
     action_limit = env.action_space.high[0]
     # Create actor-critic module and target networks
-    ac = ActorCritic(state_dim,action_dim,action_limit,args.hidden_size,args.gamma,args.alpha)
+    ac = ActorCritic(state_dim,action_dim,action_limit,args.hidden_size,args.gamma,args.alpha,device=args.device)
     ac_targ = deepcopy(ac)
     # Freeze target networks with respect to optimizers (only update via polyak averaging)
     for p in ac_targ.parameters():
@@ -30,7 +30,7 @@ def sac(args):
     # List of parameters for both Q-networks (save this for convenience)
     q_params = itertools.chain(ac.q1.parameters(), ac.q2.parameters())
     # Experience buffer
-    buffer = Buffer(state_dim,action_dim, buffer_size=args.buffer_size)
+    buffer = Buffer(state_dim,action_dim, buffer_size=args.buffer_size,device=args.device)
     # Set up optimizers for policy and q-function
     pi_optimizer = Adam(ac.pi.parameters(), lr=args.lr)
     q_optimizer = Adam(q_params, lr=args.lr)
@@ -68,7 +68,7 @@ def sac(args):
             o, d, ep_ret, ep_len = test_env.reset(), False, 0, 0
             while not(d or (ep_len == args.max_ep_len)):
                 # Take deterministic actions at test time
-                o, r, d = test_env.step(ac.act(torch.as_tensor(o, dtype=torch.float32), deterministic))
+                o, r, d = test_env.step(ac.act(torch.as_tensor(o, dtype=torch.float32).to(args.device), deterministic))
                 ep_ret += r
                 ep_len += 1
 
@@ -81,7 +81,7 @@ def sac(args):
     for t in range(total_steps):
         # Until start_steps have elapsed, randomly sample actions from a uniform distribution for better exploration. Afterwards, use the learned policy.
         if t > args.start_steps:
-            a = ac.act(torch.as_tensor(o, dtype=torch.float32))
+            a = ac.act(torch.as_tensor(o, dtype=torch.float32).to(args.device))
         else:
             a = env.action_space.sample()
         # Step the env
@@ -122,6 +122,7 @@ def boolcheck(x):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
+    DEVICE = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
     parser.add_argument("--env_name", type=str, default="Pendulum-v0")
     parser.add_argument("--max_ep_len", type=int, default=1000)
     parser.add_argument("--seed",type=int, default=-1)
@@ -140,4 +141,5 @@ if __name__ == '__main__':
     parser.add_argument("--num_test_episodes",type=int,default=10)
     parser.add_argument("--batch_size",type=int,default=100)
     args =parser.parse_args()
+    args.device = DEVICE
     sac(args)
