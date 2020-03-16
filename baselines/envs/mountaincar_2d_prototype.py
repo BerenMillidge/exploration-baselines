@@ -24,13 +24,13 @@ class MountainCar2D(gym.Env):
         self.zmin = zmin
         self.zthresh = zthresh
 
-        self.low_state = np.array([self.min_position, -self.max_speed,zmin,-1])
-        self.high_state = np.array([self.max_position, self.max_speed,zmax,1])
+        self.low_state = np.array([self.min_position, -self.max_speed])
+        self.high_state = np.array([self.max_position, self.max_speed])
 
         self.viewer = None
 
         self.action_space = gym.spaces.Box(
-            low=self.min_action, high=self.max_action, shape=(2,), dtype=np.float32
+            low=self.min_action, high=self.max_action, shape=(1,), dtype=np.float32
         )
         self.observation_space = gym.spaces.Box(
             low=self.low_state, high=self.high_state, dtype=np.float32
@@ -48,14 +48,14 @@ class MountainCar2D(gym.Env):
     def step(self, action):
         position = self.state[0]
         velocity = self.state[1]
-        zpos = self.state[2]
-        zvel = self.state[3]
+        #zpos = self.state[2]
+        #zvel = self.state[3]
         force = min(max(action[0], -1.0), 1.0)
         #zvel += min(max(action[1], -1.0), 1.0) * self.power
-        zvel = 0 # a hack to see if exploration still fails due to this even when position is fixed completely in the z plane
+        #zvel = 0 # a hack to see if exploration still fails due to this even when position is fixed completely in the z plane
 
         velocity += force * self.power - 0.0025 * math.cos(3 * position)
-        zpos = min(max(zpos + zvel,self.zmin),self.zmax)
+        #zpos = min(max(zpos + zvel,self.zmin),self.zmax)
         velocity = min(max(velocity, -self.max_speed),self.max_speed)
         position += velocity
         position = min(max(position, -self.max_position),self.max_position)
@@ -68,11 +68,11 @@ class MountainCar2D(gym.Env):
         if done:
             reward = 1.0
 
-        self.state = np.array([position, velocity,zpos,zvel])
+        self.state = np.array([position, velocity])
         return self.state, reward, done, {}
 
     def reset(self):
-        self.state = np.array([self.np_random.uniform(low=-0.6, high=-0.4), 0,0,0])
+        self.state = np.array([self.np_random.uniform(low=-0.6, high=-0.4), 0])
         return np.array(self.state)
 
     def state_from_obs(self,obs):
