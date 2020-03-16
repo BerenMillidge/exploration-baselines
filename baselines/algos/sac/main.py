@@ -86,6 +86,8 @@ def sac(args):
             a = env.action_space.sample()
         # Step the env
         o2, r, d = env.step(a)
+        if args.render_env:
+            env.render()
         ep_ret += r
         ep_len += 1
         # Ignore the "done" signal if it comes from hitting the time horizon (that is, when it's an artificial terminal signal that isn't based on the agent's state)
@@ -140,6 +142,7 @@ if __name__ == '__main__':
     parser.add_argument("--update_every",type=int,default=50)
     parser.add_argument("--num_test_episodes",type=int,default=10)
     parser.add_argument("--batch_size",type=int,default=100)
+    parser.add_argument("--render_env",type=boolcheck,default=False)
     args =parser.parse_args()
     args.device = DEVICE
     sac(args)
