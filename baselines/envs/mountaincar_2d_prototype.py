@@ -15,6 +15,8 @@ class MountainCar2D(gym.Env):
         self.goal_velocity = goal_velocity
         self.power = 0.0015
         self.no_penalty = no_penalty
+        self.max_zvel
+        self.max_zpos
 
         self.low_state = np.array([self.min_position, -self.max_speed,-0.1,-0.1])
         self.high_state = np.array([self.max_position, self.max_speed,0.1,0.1])
@@ -40,9 +42,12 @@ class MountainCar2D(gym.Env):
     def step(self, action):
         position = self.state[0]
         velocity = self.state[1]
+        zpos = self.state[2]
+        zforce = min(max(action[1],-1.0),1.0)
         force = min(max(action[0], -1.0), 1.0)
 
         velocity += force * self.power - 0.0025 * math.cos(3 * position)
+        zvel += zforce * self.power
         if velocity > self.max_speed:
             velocity = self.max_speed
         if velocity < -self.max_speed:
@@ -54,6 +59,14 @@ class MountainCar2D(gym.Env):
             position = self.min_position
         if position == self.min_position and velocity < 0:
             velocity = 0
+        if zpos > self.max_zpos:
+            zpos  = self.max_zpos
+        if zpos < -self.max_zpos:
+            zpos = -self.max_zpos
+        if zvel > self.max_zvel:
+            zvel = self.max_zvel
+        if zvel < -self.max_zvel:
+            zvel = -self.max_zvel
 
         done = bool(position >= self.goal_position and velocity >= self.goal_velocity)
 
@@ -61,7 +74,7 @@ class MountainCar2D(gym.Env):
         if done:
             reward = 1.0
 
-        self.state = np.array([position, velocity,0,0])
+        self.state = np.array([position, velocity,zpos,zvel])
         return self.state, reward, done, {}
 
     def reset(self):
