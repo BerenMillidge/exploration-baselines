@@ -22,7 +22,7 @@ class MountainCar2D(gym.Env):
         self.viewer = None
 
         self.action_space = gym.spaces.Box(
-            low=self.min_action, high=self.max_action, shape=(1,), dtype=np.float32
+            low=self.min_action, high=self.max_action, shape=(2,), dtype=np.float32
         )
         self.observation_space = gym.spaces.Box(
             low=self.low_state, high=self.high_state, dtype=np.float32
