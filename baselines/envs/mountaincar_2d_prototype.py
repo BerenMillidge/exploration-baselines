@@ -1,16 +1,11 @@
-# simplest implementation of a 2d mountain car. Basically it's the same in the second dimension for as long as desired (infinitely)
-# or within 2d limits. Just a tiled copy of the 1d version. The reward is only obtained within a small delta of z=0.
-#movement along x-y dimension is constrained standardly. Movement in z is unconstrained - simple velocity/acceleration
-
 import math
 import gym
 import numpy as np
-import matplotlib.pyplot as plt
 
 class MountainCar2D(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"], "video.frames_per_second": 30}
 
-    def __init__(self, goal_velocity=0, no_penalty=True,zmax=1,zmin=-1,zthresh=0.5):
+    def __init__(self, goal_velocity=0, no_penalty=True):
         self.min_action = -1.0
         self.max_action = 1.0
         self.min_position = -1.2
@@ -20,9 +15,6 @@ class MountainCar2D(gym.Env):
         self.goal_velocity = goal_velocity
         self.power = 0.0015
         self.no_penalty = no_penalty
-        self.zmax = zmax
-        self.zmin = zmin
-        self.zthresh = zthresh
 
         self.low_state = np.array([self.min_position, -self.max_speed])
         self.high_state = np.array([self.max_position, self.max_speed])
@@ -48,21 +40,22 @@ class MountainCar2D(gym.Env):
     def step(self, action):
         position = self.state[0]
         velocity = self.state[1]
-        #zpos = self.state[2]
-        #zvel = self.state[3]
         force = min(max(action[0], -1.0), 1.0)
-        #zvel += min(max(action[1], -1.0), 1.0) * self.power
-        #zvel = 0 # a hack to see if exploration still fails due to this even when position is fixed completely in the z plane
 
         velocity += force * self.power - 0.0025 * math.cos(3 * position)
-        #zpos = min(max(zpos + zvel,self.zmin),self.zmax)
-        velocity = min(max(velocity, -self.max_speed),self.max_speed)
+        if velocity > self.max_speed:
+            velocity = self.max_speed
+        if velocity < -self.max_speed:
+            velocity = -self.max_speed
         position += velocity
-        position = min(max(position, -self.max_position),self.max_position)
+        if position > self.max_position:
+            position = self.max_position
+        if position < self.min_position:
+            position = self.min_position
         if position == self.min_position and velocity < 0:
             velocity = 0
 
-        done = bool(position >= self.goal_position and velocity >= self.goal_velocity) # REMOVED Z-dependence of reward. Put this back in if it succeeds like this.
+        done = bool(position >= self.goal_position and velocity >= self.goal_velocity)
 
         reward = 0
         if done:
@@ -85,7 +78,6 @@ class MountainCar2D(gym.Env):
         return np.sin(3 * xs) * 0.45 + 0.55
 
     def render(self, mode="human"):
-        raise NotImplementedError("Sorry rendering for 2d env not implemented yet")
         screen_width = 600
         screen_height = 400
 
@@ -151,36 +143,3 @@ class MountainCar2D(gym.Env):
         if self.viewer:
             self.viewer.close()
             self.viewer = None
-
-    def vel_fn(self, position):
-        return  -0.0025 * math.cos(3 * position)
-
-    def plot_velocity_function(self):
-        xs = np.linspace(self.min_position,self.max_position, 1000)
-        vels = [self.vel_fn(pos) for pos in xs]
-        plt.plot(xs, vels)
-        plt.show()
-
-
-if __name__ == '__main__':
-    env = MountainCar2D()
-    env.plot_velocity_function()
-    # so somehow this is the wrong way around, which is really really weird. It would be pretty damn bad if the standard mountain car implementation was incorrec
-    s = env.reset()
-    print(s)
-    a = env.action_space.sample()
-    print(a)
-    ss = []
-    for i in range(100):
-      a = env.action_space.sample()
-      s,r,done,_ = env.step(a)
-      ss.append(s)
-
-    ss = np.array(ss)
-    plt.plot(ss[:,0],label="xpos")
-    plt.plot(ss[:,1],label="xvel")
-    plt.plot(ss[:,2], label="zpos")
-    plt.plot(ss[:,3], label="zvel")
-    plt.legend()
-    plt.show()
-    print(ss[:,1])
