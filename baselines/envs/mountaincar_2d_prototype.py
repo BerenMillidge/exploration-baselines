@@ -16,8 +16,8 @@ class MountainCar2D(gym.Env):
         self.power = 0.0015
         self.no_penalty = no_penalty
 
-        self.low_state = np.array([self.min_position, -self.max_speed])
-        self.high_state = np.array([self.max_position, self.max_speed])
+        self.low_state = np.array([self.min_position, -self.max_speed,-0.1,-0.1])
+        self.high_state = np.array([self.max_position, self.max_speed,0.1,0.1])
 
         self.viewer = None
 
@@ -61,11 +61,11 @@ class MountainCar2D(gym.Env):
         if done:
             reward = 1.0
 
-        self.state = np.array([position, velocity])
+        self.state = np.array([position, velocity,0,0])
         return self.state, reward, done, {}
 
     def reset(self):
-        self.state = np.array([self.np_random.uniform(low=-0.6, high=-0.4), 0])
+        self.state = np.array([self.np_random.uniform(low=-0.6, high=-0.4), 0,0,0])
         return np.array(self.state)
 
     def state_from_obs(self,obs):
