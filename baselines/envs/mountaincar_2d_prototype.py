@@ -67,9 +67,9 @@ class MountainCar2D(gym.Env):
             zvel = -self.max_zvel
         zpos += zvel
         if zpos > self.max_zpos:
-            zpos  = self.max_zpos
+            zpos  = -self.max_zpos
         if zpos < -self.max_zpos:
-            zpos = -self.max_zpos
+            zpos = self.max_zpos
 
         #adding in z conditions and expansion
         done = bool(position >= self.goal_position and velocity >= self.goal_velocity and zpos >= -0.5 and zpos <=0.5)
