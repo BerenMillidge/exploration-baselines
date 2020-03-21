@@ -9,6 +9,7 @@ try:
     from baselines.envs import (
         SparseMountainCar,
         MountainCar2D,
+        NoisyMountainCar2D,
         SparseCartpoleSwingup,
         SparseDoublePendulum,
         SparseHalfCheetah,
@@ -29,6 +30,7 @@ except:
     from baselines.envs import (
         SparseMountainCar,
         MountainCar2D,
+        NoisyMountainCar2D,
         SparseDoublePendulum,
         SparseBipedalWalker,
         StochasticMountainCar,
@@ -91,6 +93,8 @@ class TorchEnv(object):
             self._env = PendulumEnv()
         elif env_name == const.MOUNTAINCAR_2D:
             self._env=MountainCar2D()
+        elif env_name == const.NOISY_MOUNTAIN_CAR_2D:
+            self._env = NoisyMountainCar2D()
         else:
             self._env = gym.make(env_name)
 
