@@ -1,11 +1,13 @@
+# this variant of 2d mountaincar simply adds noise to areas outside the bool region, perhaps making it more interesting to explore.
+#to see if this pathology will emphasise goal directed vs normal exploration
 import math
 import gym
 import numpy as np
 
-class MountainCar2D(gym.Env):
+class HeteroscedasticNoisyMountainCar2D(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"], "video.frames_per_second": 30}
 
-    def __init__(self, goal_velocity=0, no_penalty=True):
+    def __init__(self, goal_velocity=0, no_penalty=True,scedasticity_coeff=0.1):
         self.min_action = -1.0
         self.max_action = 1.0
         self.min_position = -1.2
@@ -15,8 +17,9 @@ class MountainCar2D(gym.Env):
         self.goal_velocity = goal_velocity
         self.power = 0.0015
         self.no_penalty = no_penalty
-        self.max_zvel = 0.07
-        self.max_zpos = 10
+        self.max_zvel = 0.1
+        self.max_zpos = 20
+        self.scedasticity_coeff = scedasticity_coeff
 
         self.low_state = np.array([self.min_position, -self.max_speed,-0.1,-0.1])
         self.high_state = np.array([self.max_position, self.max_speed,0.1,0.1])
@@ -70,6 +73,13 @@ class MountainCar2D(gym.Env):
             zpos  = self.max_zpos
         if zpos < -self.max_zpos:
             zpos = -self.max_zpos
+
+        #add noise! - -WARNING adding this before the reward could teleport it back into reward zone messing things up. Or maybe not.
+        #it's hard to tell!
+        if zpos >= 1 or zpos <= -1:
+            noise_var = ((abs(zpos) -1) * self.scedasticity_coeff) + 1e-4
+            zpos += np.random.normal(0,noise_var)
+
 
         #adding in z conditions and expansion
         done = bool(position >= self.goal_position and velocity >= self.goal_velocity and zpos >= -0.5 and zpos <=0.5)

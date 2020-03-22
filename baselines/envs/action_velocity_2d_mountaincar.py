@@ -2,7 +2,7 @@ import math
 import gym
 import numpy as np
 
-class MountainCar2D(gym.Env):
+class ActionVelocityMountainCar2D(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"], "video.frames_per_second": 30}
 
     def __init__(self, goal_velocity=0, no_penalty=True):
@@ -15,7 +15,7 @@ class MountainCar2D(gym.Env):
         self.goal_velocity = goal_velocity
         self.power = 0.0015
         self.no_penalty = no_penalty
-        self.max_zvel = 0.07
+        self.max_zvel = 1
         self.max_zpos = 10
 
         self.low_state = np.array([self.min_position, -self.max_speed,-0.1,-0.1])
@@ -48,7 +48,7 @@ class MountainCar2D(gym.Env):
         force = min(max(action[0], -1.0), 1.0)
 
         velocity += force * self.power - 0.0025 * math.cos(3 * position)
-        zvel += zforce * self.power
+        zvel = zforce
         if velocity > self.max_speed:
             velocity = self.max_speed
         if velocity < -self.max_speed:

@@ -10,6 +10,8 @@ try:
         SparseMountainCar,
         MountainCar2D,
         NoisyMountainCar2D,
+        ActionVelocityMountainCar2D,
+        HeteroscedasticNoisyMountainCar2D,
         SparseCartpoleSwingup,
         SparseDoublePendulum,
         SparseHalfCheetah,
@@ -31,6 +33,8 @@ except:
         SparseMountainCar,
         MountainCar2D,
         NoisyMountainCar2D,
+        ActionVelocityMountainCar2D,
+        HeteroscedasticNoisyMountainCar2D,
         SparseDoublePendulum,
         SparseBipedalWalker,
         StochasticMountainCar,
@@ -95,6 +99,10 @@ class TorchEnv(object):
             self._env=MountainCar2D()
         elif env_name == const.NOISY_MOUNTAIN_CAR_2D:
             self._env = NoisyMountainCar2D()
+        elif env_name ==const.ACTION_VELOCITY_MOUNTAIN_CAR_2D:
+            self._env = ActionVelocityMountainCar2D()
+        elif env_name == const.HETEROSCEDASTIC_NOISY_MOUNTAIN_CAR_2D:
+            self._env = HeteroscedasticNoisyMountainCar2D()
         else:
             self._env = gym.make(env_name)
 

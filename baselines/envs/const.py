@@ -1,6 +1,8 @@
 SPARSE_MOUNTAIN_CAR = "SparseMountainCar"
 MOUNTAINCAR_2D = "MountainCar2D"
 NOISY_MOUNTAIN_CAR_2D = "NoisyMountainCar2D"
+ACTION_VELOCITY_MOUNTAIN_CAR_2D ="ActionVelocityMountainCar2D"
+HETEROSCEDASTIC_NOISY_MOUNTAIN_CAR_2D = "HeteroscedasticNoisyMountainCar2D"
 SPARSE_CARTPOLE_SWINGUP = "SparseCartpoleSwingup"
 SPARSE_DOUBLE_PENDULUM = "SparseDoublePendulum"
 SPARSE_HALF_CHEETAH = "SparseHalfCheetah"
