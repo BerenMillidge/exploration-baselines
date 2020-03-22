@@ -15,7 +15,7 @@ try:
   from .lunar_lander import LunarLander, LunarLanderContinuous
   from .pendulum import PendulumEnv
   from .mountaincar_2d_prototype import MountainCar2D
-  from .noisy_2d_moutain_car import NoisyMountainCar2D
+  from .noisy_2d_mountain_car import NoisyMountainCar2D
   from .action_velocity_2d_mountaincar import ActionVelocityMountainCar2D
   from .heteroscedastic_noise_z_mountain_car import HeteroscedasticNoisyMountainCar2D
 except:
@@ -32,7 +32,7 @@ except:
   from .lunar_lander import LunarLander, LunarLanderContinuous
   from .pendulum import PendulumEnv
   from .mountaincar_2d_prototype import MountainCar2D
-  from .noisy_2d_moutain_car import NoisyMountainCar2D
+  from .noisy_2d_mountain_car import NoisyMountainCar2D
   from .action_velocity_2d_mountaincar import ActionVelocityMountainCar2D
   from .heteroscedastic_noise_z_mountain_car import HeteroscedasticNoisyMountainCar2D
 
