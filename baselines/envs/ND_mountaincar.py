@@ -8,7 +8,7 @@ from copy import deepcopy
 class MountainCarND(gym.Env):
     metadata = {"render.modes": ["human", "rgb_array"], "video.frames_per_second": 30}
 
-    def __init__(self, N=1,goal_velocity=0, no_penalty=True):
+    def __init__(self, N=2,goal_velocity=0, no_penalty=True):
         self.N = N
         self.min_action = -1.0
         self.max_action = 1.0
@@ -46,6 +46,31 @@ class MountainCarND(gym.Env):
 
         self.seed()
         self.reset()
+
+    def reset_with_N(self, N):
+        self.N = N
+        self.low_state = [self.min_position, -self.max_speed]
+        self.high_state =[self.max_position, self.max_speed]
+        for i in range(N):
+            self.low_state += [-self.distractor_position_limit,-self.distractor_speed_limit]
+            self.high_state += [self.distractor_position_limit,self.distractor_speed_limit]
+        self.low_state = np.array(self.low_state)
+        self.high_state = np.array(self.high_state)
+
+        self.viewer = None
+
+        self.action_space = gym.spaces.Box(
+            low=self.min_action, high=self.max_action, shape=(1+self.N,), dtype=np.float32
+        )
+        self.observation_space = gym.spaces.Box(
+            low=self.low_state, high=self.high_state, dtype=np.float32
+        )
+        self.max_reward = 1
+        self.min_reward = 0
+
+        self.seed()
+        self.reset()
+
 
     def seed(self, seed=None):
         self.np_random, seed = gym.utils.seeding.np_random(seed)
