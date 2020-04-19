@@ -18,6 +18,7 @@ try:
   from .noisy_2d_mountain_car import NoisyMountainCar2D
   from .action_velocity_2d_mountaincar import ActionVelocityMountainCar2D
   from .heteroscedastic_noise_z_mountain_car import HeteroscedasticNoisyMountainCar2D
+  from .ND_mountaincar import MountainCarND
 except:
   print("Cannot import roboschool: only importing those envs which don't require it")
   from .mountain_car import SparseMountainCar
@@ -35,6 +36,7 @@ except:
   from .noisy_2d_mountain_car import NoisyMountainCar2D
   from .action_velocity_2d_mountaincar import ActionVelocityMountainCar2D
   from .heteroscedastic_noise_z_mountain_car import HeteroscedasticNoisyMountainCar2D
+  from .ND_mountaincar import MountainCarND
 
 from .torch_env import TorchEnv
 from .wrappers import Wrapper, NoisyEnv

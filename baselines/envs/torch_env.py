@@ -8,6 +8,7 @@ try:
     import roboschool
     from baselines.envs import (
         SparseMountainCar,
+        MountainCarND,
         MountainCar2D,
         NoisyMountainCar2D,
         ActionVelocityMountainCar2D,
@@ -31,6 +32,7 @@ try:
 except:
     from baselines.envs import (
         SparseMountainCar,
+        MountainCarND,
         MountainCar2D,
         NoisyMountainCar2D,
         ActionVelocityMountainCar2D,
@@ -103,6 +105,8 @@ class TorchEnv(object):
             self._env = ActionVelocityMountainCar2D()
         elif env_name == const.HETEROSCEDASTIC_NOISY_MOUNTAIN_CAR_2D:
             self._env = HeteroscedasticNoisyMountainCar2D()
+        elif env_name == const.ND_MOUNTAIN_CAR:
+            self._env = MountainCarND()
         else:
             self._env = gym.make(env_name)
 

@@ -1,4 +1,5 @@
 SPARSE_MOUNTAIN_CAR = "SparseMountainCar"
+ND_MOUNTAIN_CAR = "MountainCarND"
 MOUNTAINCAR_2D = "MountainCar2D"
 NOISY_MOUNTAIN_CAR_2D = "NoisyMountainCar2D"
 ACTION_VELOCITY_MOUNTAIN_CAR_2D ="ActionVelocityMountainCar2D"
