@@ -101,7 +101,7 @@ class MountainCarND(gym.Env):
         print("DONE: ",done)
         for i in range(self.N):
             if not (self.state[(i*2)+2] >= -self.reward_thresh and self.state[(i*2)+2] <=self.reward_thresh):
-                bool = False
+                done = False
 
         reward = 0
         if done:
